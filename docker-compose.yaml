@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  user:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3005:3005" # Порт для проекта user
+    environment:
+      - PORT=3005
+      - DATABASE_URL=postgresql://myuser:mypassword@postgres:5432/mydatabase
+    command: sh -c "npx prisma db push && npm run start -- user"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  niches:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002" # Порт для проекта niches
+    environment:
+      - PORT=3002
+      - DATABASE_URL=postgresql://myuser:mypassword@postgres:5432/mydatabase
+    command: sh -c "npx prisma db push && npm run start -- niches"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Порт для api-gateway
+    environment:
+      - PORT=3000
+      - DATABASE_URL=postgresql://myuser:mypassword@postgres:5432/mydatabase
+    command: sh -c "npx prisma db push && npm run start"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres-container
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    ports:
+      - "7000:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
