@@ -10,7 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
             {
                 name: 'USERS_CLIENT',
                 transport: Transport.TCP,
-                options: { host: 'user', port: 3005 },
+                options: { host: 'localhost', port: 3010 },
             },
         ]),
         JwtModule.register({ global: true, secret: 'secret_lol', signOptions: { expiresIn: '12h' } }),

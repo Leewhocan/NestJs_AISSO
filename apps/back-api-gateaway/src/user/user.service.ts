@@ -17,8 +17,19 @@ export class UserService {
             }),
         );
     }
-    addUser(userInfo) {
-        return this.usersClient.send('user.addUser', userInfo).pipe(
+    auth(userInfo) {
+        return this.usersClient.send('user.auth', userInfo).pipe(
+            catchError((error) => {
+                // Log the error
+                console.error('Error fetching users:', error);
+
+                // Throw a new error with a more user-friendly message
+                return throwError(() => new Error('Failed to fetch users. Please try again later.'));
+            }),
+        );
+    }
+    login(loginInfo) {
+        return this.usersClient.send('user.login', loginInfo).pipe(
             catchError((error) => {
                 // Log the error
                 console.error('Error fetching users:', error);

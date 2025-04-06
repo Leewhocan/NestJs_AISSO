@@ -10,8 +10,12 @@ export class UserController {
     findAll() {
         return this.userService.findAll();
     }
-    @MessagePattern('user.addUser')
-    async addUser(@Payload() userInfo) {
-        return this.userService.addUser(userInfo);
+    @MessagePattern('user.auth')
+    async auth(@Payload() userInfo) {
+        return this.userService.auth(userInfo);
+    }
+    @MessagePattern('user.login')
+    async login(@Payload() loginInfo) {
+        return this.userService.login(loginInfo);
     }
 }
