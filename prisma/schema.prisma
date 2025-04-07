@@ -7,10 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ROLES {
+  IMPORTER
+  EXPORTER
+  SUPER_ADMIN
+}
+
 model User {
   id       Int    @id @default(autoincrement())
-  email    String
+  email    String @unique
   name     String
   password String
-  role     String
+  role     ROLES
 }
