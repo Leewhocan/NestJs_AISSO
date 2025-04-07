@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { NichesService } from './niches.service';
 import { CreateNichDto } from './dto/create-nich.dto';
 import { UpdateNichDto } from './dto/update-nich.dto';
-import { AuthGuard } from '../guards/AuthGuard';
+import { AuthGuard } from '../../guards/AuthGuard';
 
 @Controller('niches')
 export class NichesController {

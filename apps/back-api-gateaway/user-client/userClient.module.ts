@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
+import { UserClientService } from './userClient.service';
+import { UserClientController } from './userClient.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { JwtModule } from '@nestjs/jwt';
 
@@ -15,7 +15,7 @@ import { JwtModule } from '@nestjs/jwt';
         ]),
         JwtModule.register({ global: true, secret: 'secret_lol', signOptions: { expiresIn: '12h' } }),
     ],
-    providers: [UserService],
-    controllers: [UserController],
+    providers: [UserClientService],
+    controllers: [UserClientController],
 })
 export class UserModule {}
