@@ -1,15 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from './prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { InternalServerErrorException } from '@nestjs/common';
 import { hashPassword } from './utils/bcrypt';
-type UserLoginInput = {
-    email: string;
+import * as bcrypt from 'bcrypt';
+import { UserLoginInput, AuthResult } from 'apps/lib/UserService/UserService.dto';
 
-    password: string;
-};
-type AuthResult = { acseesToken: string; userName: string; role: string };
 @Injectable()
 export class UserService {
     constructor(
@@ -17,7 +14,8 @@ export class UserService {
         private jwtService: JwtService,
     ) {}
     async findAll(): Promise<User[]> {
-        return await this.prisma.user.findMany();
+        const users = await this.prisma.user.findMany();
+        return users;
     }
     async auth(userInfo: Prisma.UserCreateInput): Promise<AuthResult> {
         try {
@@ -26,39 +24,36 @@ export class UserService {
             const response = await this.signIn(user);
             return response;
         } catch (error) {
-            console.error('Error creating user:', error);
-            throw new Error('Failed to create user. Please try again later.');
+            if (error instanceof Prisma.PrismaClientKnownRequestError) {
+                if (error.code === 'P2002') {
+                    throw new ConflictException('Пользователь с таким email уже существует');
+                }
+            }
+            throw new InternalServerErrorException('Ошибка сервиса');
         }
     }
     async login(loginInfo: UserLoginInput): Promise<AuthResult> {
         try {
-            // 1. Находим пользователя по email (без пароля!)
             const user = await this.prisma.user.findFirst({
-                where: { email: loginInfo.email, password: loginInfo.password },
+                where: { email: loginInfo.email },
             });
 
-            // 2. Проверяем существование пользователя
             if (!user) {
-                console.log(user);
                 throw new UnauthorizedException('Пользователь не найден');
             }
 
-            // 3. Безопасное сравнение паролей
-            // const isPasswordValid = await bcrypt.compare(loginInfo.password, user.password);
-            // if (!isPasswordValid) {
-            //     throw new UnauthorizedException('Неверный пароль');
-            // }
+            const isPasswordValid = await bcrypt.compare(loginInfo.password, user.password);
+            if (!isPasswordValid) {
+                throw new UnauthorizedException('Неверный пароль');
+            }
 
-            // 4. Генерация токена
             return this.signIn(user);
         } catch (error) {
-            // Перехватываем только ожидаемые ошибки
             if (error instanceof UnauthorizedException) {
-                throw error; // Пробрасываем дальше
+                throw error;
             }
-            // Логируем неожиданные ошибки
 
-            throw new InternalServerErrorException('Ошибка сервера при входе');
+            throw new InternalServerErrorException('Ошибка сервиса');
         }
     }
     async signIn(user: User): Promise<AuthResult> {

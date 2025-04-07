@@ -20,23 +20,34 @@ export class UserService {
     auth(userInfo) {
         return this.usersClient.send('user.auth', userInfo).pipe(
             catchError((error) => {
-                // Log the error
-                console.error('Error fetching users:', error);
+                if (error?.details) {
+                    console.log(error);
+                    throw new HttpException(
+                        { statusCode: error.statusCode, message: error.message, details: error.details },
+                        HttpStatus.INTERNAL_SERVER_ERROR,
+                    );
+                }
 
-                // Throw a new error with a more user-friendly message
-                return throwError(() => new Error('Failed to fetch users. Please try again later.'));
+                // Для других ошибок
+                throw new HttpException(
+                    {
+                        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                        message: 'Login service unavailable',
+                        details: 'Please try again later',
+                    },
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                );
             }),
         );
     }
     login(loginInfo) {
         return this.usersClient.send('user.login', loginInfo).pipe(
             catchError((error) => {
-                console.log('пришла такая ошибка =', error, error?.$$typeof);
-                if (error instanceof RpcException) {
-                    const err = error.getError();
+                if (error?.details) {
+                    console.log(error);
                     throw new HttpException(
-                        err['message'] || 'Login failed',
-                        err['statusCode'] || HttpStatus.BAD_REQUEST,
+                        { statusCode: error.statusCode, message: error.message, details: error.details },
+                        HttpStatus.INTERNAL_SERVER_ERROR,
                     );
                 }
 

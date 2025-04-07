@@ -14,7 +14,7 @@ export class NichesController {
     }
 
     @Get()
-    @UseGuards(AuthGuard)
+    // @UseGuards(AuthGuard)
     findAll() {
         return this.nichesService.findAll();
     }
