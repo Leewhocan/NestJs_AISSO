@@ -20,3 +20,19 @@ model User {
   password String
   role     ROLES
 }
+
+model Country {
+  value    String  @unique
+  title    String
+  search   String  @db.Text
+  alpha2   String
+  disabled Boolean @default(false)
+  friend   Boolean @default(false)
+}
+
+model Tnved {
+  value    String  @unique
+  title    String
+  disabled Boolean @default(false)
+  search   String  @db.Text
+}

@@ -17,4 +17,4 @@ import { JwtModule } from '@nestjs/jwt';
     controllers: [NichesController],
     providers: [NichesService],
 })
-export class NichesModule {}
+export class NichesClientModule {}
