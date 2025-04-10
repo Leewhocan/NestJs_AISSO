@@ -45,6 +45,15 @@
             "compilerOptions": {
                 "tsConfigPath": "apps/filter/tsconfig.app.json"
             }
+        },
+        "contract": {
+            "type": "application",
+            "root": "apps/contractsService",
+            "entryFile": "main",
+            "sourceRoot": "apps/contractsService/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/contractsService/tsconfig.app.json"
+            }
         }
     }
 }
