@@ -7,7 +7,7 @@ export class FilterClientService {
     constructor(@Inject('FILTER_CLIENT') private filterClient: ClientProxy) {}
 
     getCountry(countryValue: string = '') {
-        console.log(countryValue);
+        // console.log(countryValue);
         return this.filterClient.send('filter.getCountry', countryValue).pipe(
             catchError((error) => {
                 console.error('Error fetching users:', error);

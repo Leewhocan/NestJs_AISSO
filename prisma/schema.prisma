@@ -14,25 +14,44 @@ enum ROLES {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
   name     String
   password String
   role     ROLES
+  Contract Contract[]
 }
 
 model Country {
-  value    String  @unique
+  value    String     @unique
   title    String
-  search   String  @db.Text
+  search   String     @db.Text
   alpha2   String
-  disabled Boolean @default(false)
-  friend   Boolean @default(false)
+  disabled Boolean    @default(false)
+  friend   Boolean    @default(false)
+  Contract Contract[]
 }
 
 model Tnved {
-  value    String  @unique
+  value    String     @unique
   title    String
-  disabled Boolean @default(false)
-  search   String  @db.Text
+  disabled Boolean    @default(false)
+  search   String     @db.Text
+  Contract Contract[]
+}
+
+model Contract {
+  id          Int      @id @default(autoincrement())
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
+  title       String
+  sum         Int
+  description String   @db.Text
+  tnved       Tnved    @relation(fields: [tnvedId], references: [value]) // Явное имя связи
+  tnvedId     String
+  country     Country  @relation(fields: [countryId], references: [value])
+  countryId   String
+  image       Bytes
+  createdAt   DateTime @default(now()) // Автоматически при создании
+  updatedAt   DateTime @updatedAt // Автоматически обновляется
 }
