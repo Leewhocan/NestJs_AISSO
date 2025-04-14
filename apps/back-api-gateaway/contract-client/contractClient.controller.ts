@@ -8,15 +8,15 @@ import {
     TUpdateContract,
 } from 'apps/lib/ContractService/ContractService.dto';
 import { addAuthorInterceptor } from 'apps/interceptors/AddAuthorInterceptor';
+import { ImporterGuard } from 'apps/guards/ImpoterGuard';
 
 @Controller('contracts')
 export class ContractClientController {
     constructor(private readonly contractClientService: ContractClientService) {}
-    @UseGuards(AuthGuard)
+    @UseGuards(ImporterGuard)
     @UseInterceptors(addAuthorInterceptor)
     @Post()
     createContract(@Body() createContractInfo: TCreateContract) {
-        console.log(createContractInfo);
         return this.contractClientService.createContract(createContractInfo);
     }
     @Get()
@@ -28,25 +28,26 @@ export class ContractClientController {
     ) {
         return this.contractClientService.getLastContracts(page, ammount, tnved, country);
     }
+    @UseGuards(AuthGuard)
     @Get('one')
     getContractById(@Query('contractId') contractId: string) {
         return this.contractClientService.getContractById(contractId);
     }
     @Put()
-    @UseGuards(AuthGuard)
+    @UseGuards(ImporterGuard)
     @UseInterceptors(addAuthorInterceptor)
     updateContract(@Body() upddateContractInfo: TUpdateContract) {
         return this.contractClientService.updateContract(upddateContractInfo);
     }
     @Delete()
-    @UseGuards(AuthGuard)
+    @UseGuards(ImporterGuard)
     @UseInterceptors(addAuthorInterceptor)
     deleteContract(@Body() deletedContract: TDeleteContract) {
         return this.contractClientService.deleteContract(deletedContract);
     }
 
     @Get('auth')
-    @UseGuards(AuthGuard)
+    @UseGuards(ImporterGuard)
     @UseInterceptors(addAuthorInterceptor)
     getByAuthor(@Body() contractByAuthorInfo: TGetContractByAuthor) {
         return this.contractClientService.getContractByAuthor(contractByAuthorInfo);

@@ -54,6 +54,15 @@
             "compilerOptions": {
                 "tsConfigPath": "apps/contractsService/tsconfig.app.json"
             }
+        },
+        "agreement": {
+            "type": "application",
+            "root": "apps/agreementService",
+            "entryFile": "main",
+            "sourceRoot": "apps/agreementService/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/agreementService/tsconfig.app.json"
+            }
         }
     }
 }

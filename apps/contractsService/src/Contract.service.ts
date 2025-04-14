@@ -27,7 +27,7 @@ export class ContractService {
     async getLastConracts(page: number, ammount: number, tnved: string, country: string) {
         try {
             const whereConditions = {
-                status: STATUSES.CREATE,
+                status: { in: [STATUSES.CREATE, STATUSES.INWAIT] },
                 ...(tnved && { tnvedId: tnved }),
                 ...(country && { countryId: country }),
             };
@@ -113,25 +113,27 @@ export class ContractService {
         };
     }
     async deleteContract(deleteContractData: TDeleteContract) {
-        const existingContract = await this.prisma.contract.findUnique({
-            where: { id: deleteContractData.id },
-            select: { authorId: true },
+        return this.prisma.$transaction(async (prisma) => {
+            const existingContract = await prisma.contract.findUnique({
+                where: { id: deleteContractData.id },
+                select: { authorId: true },
+            });
+
+            if (!existingContract) throw new NotFoundException('Контракт не найден');
+            if (existingContract.authorId !== deleteContractData.authorId) {
+                throw new UnauthorizedException('Нельзя удалять чужой контракт');
+            }
+
+            await prisma.contract.delete({ where: { id: deleteContractData.id } });
+
+            // Проверка внутри транзакции
+            const exists = await prisma.contract.findUnique({
+                where: { id: deleteContractData.id },
+            });
+
+            if (exists) throw new Error('Deletion verification failed');
+
+            return { message: 'Контракт успешно удален' };
         });
-
-        if (!existingContract) {
-            throw new NotFoundException('Контракт не найден');
-        }
-
-        if (existingContract.authorId !== deleteContractData.authorId) {
-            throw new UnauthorizedException('Нельзя удалять чужой контракт');
-        }
-
-        const deletedContract = await this.prisma.contract.delete({
-            where: {
-                id: deleteContractData.id,
-            },
-        });
-
-        return { message: 'Контракт успешно удален' };
     }
 }
