@@ -19,13 +19,22 @@ enum STATUSES {
   DONE
 }
 
+enum AgreementStatus {
+  CREATED
+  COMPLETED
+  REFECTED
+  CLOSED
+}
+
 model User {
-  id       Int        @id @default(autoincrement())
-  email    String     @unique
-  name     String
-  password String
-  role     ROLES
-  Contract Contract[]
+  id                 Int         @id @default(autoincrement())
+  email              String      @unique
+  name               String
+  password           String
+  role               ROLES
+  Contract           Contract[]
+  exportedAgreements Agreement[] @relation("ExporterAgreements")
+  importedAgreements Agreement[] @relation("ImporterAgreements")
 }
 
 model Country {
@@ -47,18 +56,31 @@ model Tnved {
 }
 
 model Contract {
-  id          Int      @id @default(autoincrement())
-  author      User     @relation(fields: [authorId], references: [id])
+  id          Int         @id @default(autoincrement())
+  author      User        @relation(fields: [authorId], references: [id])
   authorId    Int
   title       String
   sum         Int
-  description String   @db.Text
-  tnved       Tnved    @relation(fields: [tnvedId], references: [value]) // Явное имя связи
+  description String      @db.Text
+  tnved       Tnved       @relation(fields: [tnvedId], references: [value])
   tnvedId     String
-  country     Country  @relation(fields: [countryId], references: [value])
+  country     Country     @relation(fields: [countryId], references: [value])
   countryId   String
   image       Bytes
-  status      STATUSES @default(CREATE)
-  createdAt   DateTime @default(now()) // Автоматически при создании
-  updatedAt   DateTime @updatedAt // Автоматически обновляется
+  status      STATUSES    @default(CREATE)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  agreements  Agreement[] @relation("ContractAgreements") // Убрали onDelete отсюда
+}
+
+model Agreement {
+  id         Int             @id @default(autoincrement())
+  exporter   User            @relation("ExporterAgreements", fields: [authorId], references: [id])
+  authorId   Int
+  importer   User            @relation("ImporterAgreements", fields: [importerId], references: [id])
+  importerId Int
+  offerPrice Int
+  contract   Contract        @relation("ContractAgreements", fields: [contractId], references: [id], onDelete: Cascade) // onDelete здесь
+  contractId Int
+  status     AgreementStatus @default(CREATED)
 }
