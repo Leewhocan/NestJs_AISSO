@@ -1,10 +1,14 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { Prisma, Country } from '@prisma/client';
+import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { Prisma, Country, STATUSES } from '@prisma/client';
 import { PrismaService } from './prisma.service';
 import { Payload } from '@nestjs/microservices';
 import { TcountryValue } from 'apps/lib/FilterService/FilterService.dto';
-import { TCreateContract } from 'apps/lib/ContractService/ContractService.dto';
-import { totalmem } from 'os';
+import {
+    TCreateContract,
+    TDeleteContract,
+    TGetContractByAuthor,
+    TUpdateContract,
+} from 'apps/lib/ContractService/ContractService.dto';
 @Injectable()
 export class ContractService {
     constructor(private prisma: PrismaService) {}
@@ -15,6 +19,7 @@ export class ContractService {
             const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
             return { ...contract, image: bufferImage };
         } catch (error) {
+            console.log(error);
             throw new Error(error);
         }
     }
@@ -22,6 +27,7 @@ export class ContractService {
     async getLastConracts(page: number, ammount: number, tnved: string, country: string) {
         try {
             const whereConditions = {
+                status: STATUSES.CREATE,
                 ...(tnved && { tnvedId: tnved }),
                 ...(country && { countryId: country }),
             };
@@ -50,5 +56,82 @@ export class ContractService {
         } catch (error) {
             throw new Error(error);
         }
+    }
+
+    async getContractById(idContract: number) {
+        try {
+            const contract = await this.prisma.contract.findFirst({
+                where: {
+                    id: idContract,
+                },
+            });
+            const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
+            return { ...contract, image: bufferImage };
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+    async getByAuthor(contractByAuthorInfo: TGetContractByAuthor) {
+        try {
+            const lastContracts = await this.prisma.contract.findMany({
+                where: {
+                    authorId: contractByAuthorInfo.authorId,
+                    status: contractByAuthorInfo.status,
+                },
+            });
+            const updateImageLastContracts = lastContracts.map((contract) => {
+                const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
+                return { ...contract, image: bufferImage };
+            });
+            return { updateImageLastContracts };
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+    async updateContract(updateContractData: TUpdateContract) {
+        const existingContract = await this.prisma.contract.findUnique({
+            where: { id: updateContractData.id },
+            select: { authorId: true },
+        });
+
+        if (!existingContract) {
+            throw new NotFoundException('Контракт не найден');
+        }
+
+        if (existingContract.authorId !== updateContractData.authorId) {
+            throw new UnauthorizedException('Нельзя изменить чужой контракт');
+        }
+
+        const updatedContract = await this.prisma.contract.update({
+            where: { id: updateContractData.id },
+            data: updateContractData,
+        });
+
+        return {
+            ...updatedContract,
+            image: updatedContract.image ? Buffer.from(Object.values(updatedContract.image)).toString('base64') : null,
+        };
+    }
+    async deleteContract(deleteContractData: TDeleteContract) {
+        const existingContract = await this.prisma.contract.findUnique({
+            where: { id: deleteContractData.id },
+            select: { authorId: true },
+        });
+
+        if (!existingContract) {
+            throw new NotFoundException('Контракт не найден');
+        }
+
+        if (existingContract.authorId !== deleteContractData.authorId) {
+            throw new UnauthorizedException('Нельзя удалять чужой контракт');
+        }
+
+        const deletedContract = await this.prisma.contract.delete({
+            where: {
+                id: deleteContractData.id,
+            },
+        });
+
+        return { message: 'Контракт успешно удален' };
     }
 }

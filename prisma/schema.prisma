@@ -13,6 +13,12 @@ enum ROLES {
   SUPER_ADMIN
 }
 
+enum STATUSES {
+  CREATE
+  INWAIT
+  DONE
+}
+
 model User {
   id       Int        @id @default(autoincrement())
   email    String     @unique
@@ -52,6 +58,7 @@ model Contract {
   country     Country  @relation(fields: [countryId], references: [value])
   countryId   String
   image       Bytes
+  status      STATUSES @default(CREATE)
   createdAt   DateTime @default(now()) // Автоматически при создании
   updatedAt   DateTime @updatedAt // Автоматически обновляется
 }
