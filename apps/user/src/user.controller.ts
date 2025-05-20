@@ -43,4 +43,21 @@ export class UserController {
             });
         }
     }
+    @MessagePattern('user.findOneById')
+    async findOneById(@Payload() findOneInfo) {
+        try {
+            const result = await this.userService.findOneById(findOneInfo);
+            return result;
+        } catch (error) {
+            throw new RpcException({
+                status: 'error',
+                message: error.message,
+                statusCode: error.getStatus?.() || 500,
+                details: {
+                    service: 'user-service',
+                    timestamp: new Date().toISOString(),
+                },
+            });
+        }
+    }
 }

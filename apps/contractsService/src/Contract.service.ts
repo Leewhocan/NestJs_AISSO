@@ -14,6 +14,7 @@ export class ContractService {
     constructor(private prisma: PrismaService) {}
 
     async createContracts(createContractInfo: TCreateContract) {
+        console.log(createContractInfo);
         try {
             const contract = await this.prisma.contract.create({ data: { ...createContractInfo } });
             const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
@@ -27,7 +28,6 @@ export class ContractService {
     async getLastConracts(page: number, ammount: number, tnved: string, country: string) {
         try {
             const whereConditions = {
-                status: { in: [STATUSES.CREATE, STATUSES.INWAIT] },
                 ...(tnved && { tnvedId: tnved }),
                 ...(country && { countryId: country }),
             };
@@ -72,6 +72,7 @@ export class ContractService {
         }
     }
     async getByAuthor(contractByAuthorInfo: TGetContractByAuthor) {
+        // console.log(contractByAuthorInfo);
         try {
             const lastContracts = await this.prisma.contract.findMany({
                 where: {
@@ -85,6 +86,7 @@ export class ContractService {
             });
             return { updateImageLastContracts };
         } catch (error) {
+            console.log(error);
             throw new Error(error);
         }
     }

@@ -1,3 +1,5 @@
+import { AgreementStatus } from '@prisma/client';
+
 export type TCreateAgreement = {
     authorId: number;
     importerId: number;
@@ -14,4 +16,15 @@ export type TCancelSubAgreement = {
 export type TSubAgreement = {
     id: number;
     contractId: number;
+};
+
+export type TGetByContract = {
+    contractId: number;
+    authorId: number;
+};
+
+export type TGetByAuthor = {
+    contractId?: number;
+    status?: AgreementStatus;
+    authorId: number;
 };

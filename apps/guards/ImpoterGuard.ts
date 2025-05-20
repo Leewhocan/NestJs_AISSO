@@ -22,13 +22,14 @@ export class ImporterGuard implements CanActivate {
         try {
             await this.jwtService.verifyAsync(token);
             const userInfo = this.jwtService.decode(token);
-
+            console.log(userInfo);
             if (userInfo?.role !== 'IMPORTER') {
                 throw new UnauthorizedException('Access restricted to importers only');
             }
 
             return true;
         } catch (error) {
+            // console.log(error);
             throw new UnauthorizedException('Invalid or expired token');
         }
     }

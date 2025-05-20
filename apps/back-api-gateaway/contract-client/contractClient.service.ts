@@ -12,6 +12,7 @@ import {
 export class ContractClientService {
     constructor(@Inject('CONTRACT_CLIENT') private contractClient: ClientProxy) {}
     createContract(createContractInfo: TCreateContract) {
+        console.log(createContractInfo);
         return this.contractClient.send('contracts.createContract', createContractInfo).pipe(
             catchError((error) => {
                 console.error('Error fetching users:', error);

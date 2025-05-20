@@ -1,9 +1,21 @@
-import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+    BadRequestException,
+    Injectable,
+    InternalServerErrorException,
+    NotFoundException,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { Prisma, Country, STATUSES, AgreementStatus } from '@prisma/client';
 import { PrismaService } from './prisma.service';
 import { Payload } from '@nestjs/microservices';
 
-import { TCancelSubAgreement, TCreateAgreement, TSubAgreement } from 'apps/lib/AgreementService/AgreementService.dto';
+import {
+    TCancelSubAgreement,
+    TCreateAgreement,
+    TGetByAuthor,
+    TGetByContract,
+    TSubAgreement,
+} from 'apps/lib/AgreementService/AgreementService.dto';
 @Injectable()
 export class AgreementService {
     constructor(private prisma: PrismaService) {}
@@ -16,7 +28,12 @@ export class AgreementService {
             if (!hasContract) {
                 throw new NotFoundException('Contract not found');
             }
-
+            const hasAgreementFromAuthor = await this.prisma.agreement.findFirst({
+                where: { authorId: createAgreementInfo.authorId, contractId: createAgreementInfo.contractId },
+            });
+            if (hasAgreementFromAuthor) {
+                throw new NotFoundException('Already done Agreement');
+            }
             const [agreement] = await this.prisma.$transaction([
                 this.prisma.agreement.create({ data: { ...createAgreementInfo } }),
                 this.prisma.contract.update({
@@ -27,6 +44,7 @@ export class AgreementService {
 
             return { agreement };
         } catch (error) {
+            console.log(error);
             throw new InternalServerErrorException('Failed to create agreement');
         }
     }
@@ -108,7 +126,62 @@ export class AgreementService {
         });
     }
 
-    async getAll() {
-        return this.prisma.agreement.findMany();
+    async getByContract(getAgreementByContract: TGetByContract) {
+        try {
+            return this.prisma.$transaction(async (prisma) => {
+                const contract = await prisma.contract.findUnique({
+                    where: { id: getAgreementByContract.contractId, authorId: getAgreementByContract.authorId },
+                    select: { id: true, status: true },
+                });
+                const agreementsonContract = await prisma.agreement.findMany({
+                    where: {
+                        contractId: contract.id,
+                    },
+                });
+                return agreementsonContract;
+            });
+        } catch (error) {
+            throw new InternalServerErrorException('Failed to Get');
+        }
+    }
+    async getByAuthor(getAgreementByAuthor: TGetByAuthor) {
+        console.log(getAgreementByAuthor);
+        try {
+            return this.prisma.$transaction(async (prisma) => {
+                // Если указан contractId - возвращаем одно соглашение по контракту
+                if (getAgreementByAuthor.contractId) {
+                    const agreement = await prisma.agreement.findFirst({
+                        where: {
+                            contractId: getAgreementByAuthor.contractId,
+                            authorId: getAgreementByAuthor.authorId,
+                        },
+                    });
+
+                    if (!agreement) {
+                        throw new NotFoundException('Agreement not found for this contract');
+                    }
+
+                    return [agreement]; // Возвращаем массив с одним элементом для единообразия
+                }
+
+                // Если contractId нет, проверяем наличие статуса
+                if (!getAgreementByAuthor.status) {
+                    throw new BadRequestException('Status is required when contractId is not provided');
+                }
+
+                // Ищем все соглашения по автору и статусу
+                return prisma.agreement.findMany({
+                    where: {
+                        authorId: getAgreementByAuthor.authorId,
+                        status: getAgreementByAuthor.status,
+                    },
+                });
+            });
+        } catch (error) {
+            if (error instanceof NotFoundException || error instanceof BadRequestException) {
+                throw error;
+            }
+            throw new InternalServerErrorException('Failed to get agreements');
+        }
     }
 }

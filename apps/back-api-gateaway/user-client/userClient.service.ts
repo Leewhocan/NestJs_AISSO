@@ -61,4 +61,31 @@ export class UserClientService {
             }),
         );
     }
+    findOneById(findOneInfo) {
+        return this.usersClient.send('user.findOneById', findOneInfo).pipe(
+            catchError((error) => {
+                console.error('Error fetching user:', error);
+
+                if (error?.details) {
+                    throw new HttpException(
+                        {
+                            statusCode: error.statusCode,
+                            message: error.message,
+                            details: error.details,
+                        },
+                        HttpStatus.INTERNAL_SERVER_ERROR,
+                    );
+                }
+
+                throw new HttpException(
+                    {
+                        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                        message: 'User service unavailable',
+                        details: 'Failed to fetch user. Please try again later.',
+                    },
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                );
+            }),
+        );
+    }
 }

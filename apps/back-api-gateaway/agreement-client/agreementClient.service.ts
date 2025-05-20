@@ -1,7 +1,13 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError, throwError } from 'rxjs';
-import { TCancelSubAgreement, TCreateAgreement, TSubAgreement } from 'apps/lib/AgreementService/AgreementService.dto';
+import {
+    TCancelSubAgreement,
+    TCreateAgreement,
+    TGetByAuthor,
+    TGetByContract,
+    TSubAgreement,
+} from 'apps/lib/AgreementService/AgreementService.dto';
 @Injectable()
 export class AgreementClientService {
     constructor(@Inject('AGREEMENT_CLIENT') private agreementClient: ClientProxy) {}
@@ -32,8 +38,17 @@ export class AgreementClientService {
             }),
         );
     }
-    getAllAgreement() {
-        return this.agreementClient.send('agreement.all', {}).pipe(
+    getAgreementByContract(getAgreementByContract: TGetByContract) {
+        return this.agreementClient.send('agreement.getByContract', getAgreementByContract).pipe(
+            catchError((error) => {
+                console.error('Error fetching users:', error);
+
+                return throwError(() => new Error('Failed to fetch users. Please try again later.'));
+            }),
+        );
+    }
+    getAgreementBuAuthor(getAgreementByAuthor: TGetByAuthor) {
+        return this.agreementClient.send('agreement.getByAuthor', getAgreementByAuthor).pipe(
             catchError((error) => {
                 console.error('Error fetching users:', error);
 

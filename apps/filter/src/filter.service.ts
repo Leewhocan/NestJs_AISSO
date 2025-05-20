@@ -8,7 +8,7 @@ export class FilterService {
     constructor(private prisma: PrismaService) {}
 
     async getCountry(@Payload() countryValue: TcountryValue) {
-        console.log(countryValue);
+        // console.log(countryValue);
         try {
             if (countryValue) {
                 const country = await this.prisma.country.findUnique({

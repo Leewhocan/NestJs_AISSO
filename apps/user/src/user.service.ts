@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from './prisma.service';
 import { JwtService } from '@nestjs/jwt';
@@ -34,6 +34,7 @@ export class UserService {
     }
     async login(loginInfo: UserLoginInput): Promise<AuthResult> {
         try {
+            console.log(loginInfo);
             const user = await this.prisma.user.findFirst({
                 where: { email: loginInfo.email },
             });
@@ -49,11 +50,34 @@ export class UserService {
 
             return this.signIn(user);
         } catch (error) {
+            console.log(error);
             if (error instanceof UnauthorizedException) {
                 throw error;
             }
 
             throw new InternalServerErrorException('Ошибка сервиса');
+        }
+    }
+    async findOneById(findOneInfo): Promise<AuthResult> {
+        console.log(findOneInfo);
+        try {
+            const id = findOneInfo.authorId;
+
+            const user = await this.prisma.user.findUnique({
+                where: { id },
+            });
+
+            if (!user) {
+                throw new NotFoundException('Пользователь не найден');
+            }
+
+            return this.signIn(user);
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                throw error;
+            }
+
+            throw new InternalServerErrorException('Ошибка при получении пользователя');
         }
     }
     async signIn(user: User): Promise<AuthResult> {
@@ -63,6 +87,6 @@ export class UserService {
             id: user.id,
         };
         const acseesToken = await this.jwtService.signAsync(tokenPayload);
-        return { acseesToken, userName: user.name, role: user.role };
+        return { acseesToken, userName: user.name, role: user.role, id: user.id };
     }
 }

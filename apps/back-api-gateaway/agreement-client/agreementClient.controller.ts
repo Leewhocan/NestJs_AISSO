@@ -2,7 +2,13 @@ import { Controller, Get, Post, Body, UseGuards, Query, UseInterceptors, Put, De
 import { AgreementClientService } from './agreementClient.service';
 
 import { addAuthorInterceptor } from 'apps/interceptors/AddAuthorInterceptor';
-import { TCancelSubAgreement, TCreateAgreement, TSubAgreement } from 'apps/lib/AgreementService/AgreementService.dto';
+import {
+    TCancelSubAgreement,
+    TCreateAgreement,
+    TGetByAuthor,
+    TGetByContract,
+    TSubAgreement,
+} from 'apps/lib/AgreementService/AgreementService.dto';
 import { ExporterGuard } from 'apps/guards/ExporterGuard';
 import { ImporterGuard } from 'apps/guards/ImpoterGuard';
 
@@ -27,8 +33,16 @@ export class AgreementClientController {
     subAgreementController(@Body() subAgreementInfo: TSubAgreement) {
         return this.agreementClientService.subAgreement(subAgreementInfo);
     }
-    @Get()
-    getAllController() {
-        return this.agreementClientService.getAllAgreement();
+    @Post('contract')
+    @UseGuards(ImporterGuard)
+    @UseInterceptors(addAuthorInterceptor)
+    getAllController(@Body() getAgreementByContract: TGetByContract) {
+        return this.agreementClientService.getAgreementByContract(getAgreementByContract);
+    }
+    @Post('byExporter')
+    @UseGuards(ExporterGuard)
+    @UseInterceptors(addAuthorInterceptor)
+    getAgreementBuAuthor(@Body() getAgreementBuAuthor: TGetByAuthor) {
+        return this.agreementClientService.getAgreementBuAuthor(getAgreementBuAuthor);
     }
 }

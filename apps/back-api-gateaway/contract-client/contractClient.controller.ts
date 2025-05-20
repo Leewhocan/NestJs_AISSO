@@ -46,7 +46,7 @@ export class ContractClientController {
         return this.contractClientService.deleteContract(deletedContract);
     }
 
-    @Get('auth')
+    @Post('auth')
     @UseGuards(ImporterGuard)
     @UseInterceptors(addAuthorInterceptor)
     getByAuthor(@Body() contractByAuthorInfo: TGetContractByAuthor) {

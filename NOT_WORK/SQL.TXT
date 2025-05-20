@@ -119,3 +119,122 @@ VALUES
 ('96', '96 Разные промтовары', false, '96 Разные промтовары'),
 ('97', '97 Произведения искусства', false, '97 Произведения искусства')
 ON CONFLICT ("value") DO NOTHING;
+
+
+
+
+
+
+
+
+
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('01', '01 Живые животные', '01 Live animals', '01 活动物', 'false', '01 Живые животные 01 Live animals 01 活动物');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('02', '02 Мясо и субпродукты', '02 Meat and edible offal', '02 肉及食用杂碎', 'false', '02 Мясо и субпродукты 02 Meat and edible offal 02 肉及食用杂碎');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('03', '03 Рыба и морепродукты', '03 Fish and seafood', '03 鱼及海产品', 'false', '03 Рыба и морепродукты 03 Fish and seafood 03 鱼及海产品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('04', '04 Молочная продукция, яйца, мед', '04 Dairy products, eggs, honey', '04 乳品、蛋品、蜂蜜', 'false', '04 Молочная продукция, яйца, мед 04 Dairy products, eggs, honey 04 乳品、蛋品、蜂蜜');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('05', '05 Прочие животные продукты', '05 Other animal products', '05 其他动物产品', 'false', '05 Прочие животные продукты 05 Other animal products 05 其他动物产品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('06', '06 Живые растения', '06 Live plants', '06 活植物', 'false', '06 Живые растения 06 Live plants 06 活植物');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('07', '07 Овощи, клубнеплоды и зернобобовые', '07 Vegetables, tubers and legumes', '07 蔬菜、块茎及豆类', 'false', '07 Овощи, клубнеплоды и зернобобовые 07 Vegetables, tubers and legumes 07 蔬菜、块茎及豆类');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('08', '08 Фрукты и орехи', '08 Fruits and nuts', '08 水果及坚果', 'false', '08 Фрукты и орехи 08 Fruits and nuts 08 水果及坚果');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('09', '09 Кофе, чай, пряности', '09 Coffee, tea, spices', '09 咖啡、茶、香料', 'false', '09 Кофе, чай, пряности 09 Coffee, tea, spices 09 咖啡、茶、香料');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('10', '10 Зерно', '10 Cereals', '10 谷物', 'false', '10 Зерно 10 Cereals 10 谷物');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('11', '11 Продукты перемола', '11 Milling products', '11 磨粉产品', 'false', '11 Продукты перемола 11 Milling products 11 磨粉产品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('12', '12 Маслосемена', '12 Oilseeds', '12 油籽', 'false', '12 Маслосемена 12 Oilseeds 12 油籽');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('13', '13 Растительные экстракты', '13 Vegetable extracts', '13 植物提取物', 'false', '13 Растительные экстракты 13 Vegetable extracts 13 植物提取物');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('14', '14 Прочие растительные продукты', '14 Other vegetable products', '14 其他植物产品', 'false', '14 Прочие растительные продукты 14 Other vegetable products 14 其他植物产品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('15', '15 Масла и жиры', '15 Oils and fats', '15 油脂', 'false', '15 Масла и жиры 15 Oils and fats 15 油脂');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('16', '16 Готовые продукты из мяса и рыбы', '16 Prepared meat and fish products', '16 肉鱼制品', 'false', '16 Готовые продукты из мяса и рыбы 16 Prepared meat and fish products 16 肉鱼制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('17', '17 Сахар и сахаристые изделия', '17 Sugar and confectionery', '17 糖及糖食', 'false', '17 Сахар и сахаристые изделия 17 Sugar and confectionery 17 糖及糖食');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('18', '18 Какао и продукты из него', '18 Cocoa and cocoa preparations', '18 可可及可可制品', 'false', '18 Какао и продукты из него 18 Cocoa and cocoa preparations 18 可可及可可制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('19', '19 Готовые продукты на основе муки', '19 Flour-based preparations', '19 面粉制品', 'false', '19 Готовые продукты на основе муки 19 Flour-based preparations 19 面粉制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('20', '20 Плодоовощная продукция', '20 Fruit and vegetable preparations', '20 果蔬制品', 'false', '20 Плодоовощная продукция 20 Fruit and vegetable preparations 20 果蔬制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('21', '21 Разные пищевые продукты', '21 Miscellaneous food preparations', '21 杂项食品', 'false', '21 Разные пищевые продукты 21 Miscellaneous food preparations 21 杂项食品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('22', '22 Вода, напитки, спирт', '22 Beverages, spirits and vinegar', '22 饮料、酒及醋', 'false', '22 Вода, напитки, спирт 22 Beverages, spirits and vinegar 22 饮料、酒及醋');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('23', '23 Корма', '23 Animal feed', '23 饲料', 'false', '23 Корма 23 Animal feed 23 饲料');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('24', '24 Табак', '24 Tobacco', '24 烟草', 'false', '24 Табак 24 Tobacco 24 烟草');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('25', '25 Нерудное минеральное сырье', '25 Salt, stone and earth', '25 盐、石料及泥土', 'false', '25 Нерудное минеральное сырье 25 Salt, stone and earth 25 盐、石料及泥土');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('26', '26 Руды', '26 Ores', '26 矿砂', 'false', '26 Руды 26 Ores 26 矿砂');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('27', '27 Топливо', '27 Mineral fuels', '27 矿物燃料', 'false', '27 Топливо 27 Mineral fuels 27 矿物燃料');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('28', '28 Продукты неорганической химии', '28 Inorganic chemicals', '28 无机化学品', 'false', '28 Продукты неорганической химии 28 Inorganic chemicals 28 无机化学品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('29', '29 Продукты органической химии', '29 Organic chemicals', '29 有机化学品', 'false', '29 Продукты органической химии 29 Organic chemicals 29 有机化学品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('30', '30 Фармацевтическая продукция', '30 Pharmaceutical products', '30 药品', 'false', '30 Фармацевтическая продукция 30 Pharmaceutical products 30 药品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('31', '31 Удобрения', '31 Fertilizers', '31 肥料', 'false', '31 Удобрения 31 Fertilizers 31 肥料');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('32', '32 Лакокрасочная продукция', '32 Paints and varnishes', '32 油漆及清漆', 'false', '32 Лакокрасочная продукция 32 Paints and varnishes 32 油漆及清漆');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('33', '33 Парфюмерные, косметические и туалетные средства', '33 Perfumes and cosmetics', '33 香水及化妆品', 'false', '33 Парфюмерные, косметические и туалетные средства 33 Perfumes and cosmetics 33 香水及化妆品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('34', '34 Моющие средства и смазочные материалы', '34 Soaps and lubricants', '34 肥皂及润滑剂', 'false', '34 Моющие средства и смазочные материалы 34 Soaps and lubricants 34 肥皂及润滑剂');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('35', '35 Белковые вещества, клеи, ферменты', '35 Albuminoids, glues, enzymes', '35 蛋白类物质、胶、酶', 'false', '35 Белковые вещества, клеи, ферменты 35 Albuminoids, glues, enzymes 35 蛋白类物质、胶、酶');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('36', '36 Пиротехника', '36 Explosives', '36 炸药', 'false', '36 Пиротехника 36 Explosives 36 炸药');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('37', '37 Фото- и кинотовары', '37 Photographic goods', '37 照相及电影用品', 'false', '37 Фото- и кинотовары 37 Photographic goods 37 照相及电影用品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('38', '38 Прочие химические продукты', '38 Miscellaneous chemical products', '38 杂项化学产品', 'false', '38 Прочие химические продукты 38 Miscellaneous chemical products 38 杂项化学产品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('39', '39 Пластмассы и изделия из них', '39 Plastics and articles thereof', '39 塑料及其制品', 'false', '39 Пластмассы и изделия из них 39 Plastics and articles thereof 39 塑料及其制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('40', '40 Каучук и резинотехнические изделия', '40 Rubber and rubber articles', '40 橡胶及其制品', 'false', '40 Каучук и резинотехнические изделия 40 Rubber and rubber articles 40 橡胶及其制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('41', '41 Шкуры и кожа', '41 Raw hides and skins', '41 生皮及皮革', 'false', '41 Шкуры и кожа 41 Raw hides and skins 41 生皮及皮革');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('42', '42 Изделия из кожи, дорожные принадлежности', '42 Leather articles, travel goods', '42 皮革制品、旅行用品', 'false', '42 Изделия из кожи, дорожные принадлежности 42 Leather articles, travel goods 42 皮革制品、旅行用品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('43', '43 Мех', '43 Furskins', '43 毛皮', 'false', '43 Мех 43 Furskins 43 毛皮');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('44', '44 Древесина и продукция деревообработки', '44 Wood and wood articles', '44 木及木制品', 'false', '44 Древесина и продукция деревообработки 44 Wood and wood articles 44 木及木制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('45', '45 Пробка', '45 Cork', '45 软木', 'false', '45 Пробка 45 Cork 45 软木');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('46', '46 Плетеные изделия', '46 Manufactures of straw', '46 编结材料制品', 'false', '46 Плетеные изделия 46 Manufactures of straw 46 编结材料制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('47', '47 Целлюлоза', '47 Pulp', '47 木浆', 'false', '47 Целлюлоза 47 Pulp 47 木浆');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('48', '48 Бумага и картон', '48 Paper and paperboard', '48 纸及纸板', 'false', '48 Бумага и картон 48 Paper and paperboard 48 纸及纸板');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('49', '49 Полиграфическая продукция', '49 Printed matter', '49 印刷品', 'false', '49 Полиграфическая продукция 49 Printed matter 49 印刷品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('50', '50 Шелк и продукция из него', '50 Silk', '50 蚕丝', 'false', '50 Шелк и продукция из него 50 Silk 50 蚕丝');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('51', '51 Шерсть и продукция из нее', '51 Wool', '51 羊毛', 'false', '51 Шерсть и продукция из нее 51 Wool 51 羊毛');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('52', '52 Хлопок и продукция из него', '52 Cotton', '52 棉花', 'false', '52 Хлопок и продукция из него 52 Cotton 52 棉花');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('53', '53 Прочие текстильные волокна', '53 Other vegetable textile fibers', '53 其他植物纺织纤维', 'false', '53 Прочие текстильные волокна 53 Other vegetable textile fibers 53 其他植物纺织纤维');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('54', '54 Химические нити и ткани из них', '54 Man-made filaments', '54 化学纤维长丝', 'false', '54 Химические нити и ткани из них 54 Man-made filaments 54 化学纤维长丝');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('55', '55 Химические волокна и ткани из них', '55 Man-made staple fibers', '55 化学纤维短纤', 'false', '55 Химические волокна и ткани из них 55 Man-made staple fibers 55 化学纤维短纤');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('56', '56 Нетканые материалы', '56 Wadding and nonwovens', '56 絮胎及无纺物', 'false', '56 Нетканые материалы 56 Wadding and nonwovens 56 絮胎及无纺物');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('57', '57 Текстильные напольные покрытия', '57 Carpets', '57 地毯', 'false', '57 Текстильные напольные покрытия 57 Carpets 57 地毯');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('58', '58 Специальные ткани', '58 Special woven fabrics', '58 特种机织物', 'false', '58 Специальные ткани 58 Special woven fabrics 58 特种机织物');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('59', '59 Текстиль технического назначения', '59 Technical textiles', '59 工业用纺织品', 'false', '59 Текстиль технического назначения 59 Technical textiles 59 工业用纺织品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('60', '60 Трикотажные полотна', '60 Knitted fabrics', '60 针织物', 'false', '60 Трикотажные полотна 60 Knitted fabrics 60 针织物');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('61', '61 Одежда трикотажная', '61 Knitted apparel', '61 针织服装', 'false', '61 Одежда трикотажная 61 Knitted apparel 61 针织服装');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('62', '62 Одежда швейная', '62 Woven apparel', '62 非针织服装', 'false', '62 Одежда швейная 62 Woven apparel 62 非针织服装');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('63', '63 Готовые текстильные изделия', '63 Made-up textiles', '63 其他纺织制成品', 'false', '63 Готовые текстильные изделия 63 Made-up textiles 63 其他纺织制成品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('64', '64 Обувь', '64 Footwear', '64 鞋靴', 'false', '64 Обувь 64 Footwear 64 鞋靴');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('65', '65 Головные уборы', '65 Headgear', '65 帽类', 'false', '65 Головные уборы 65 Headgear 65 帽类');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('66', '66 Зонты, трости', '66 Umbrellas, walking sticks', '66 伞、手杖', 'false', '66 Зонты, трости 66 Umbrellas, walking sticks 66 伞、手杖');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('67', '67 Изделия из перьев, пуха, волоса', '67 Feathers, down, artificial flowers', '67 羽毛、羽绒制品', 'false', '67 Изделия из перьев, пуха, волоса 67 Feathers, down, artificial flowers 67 羽毛、羽绒制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('68', '68 Изделия из минералов', '68 Stone, plaster, cement articles', '68 石料、石膏、水泥制品', 'false', '68 Изделия из минералов 68 Stone, plaster, cement articles 68 石料、石膏、水泥制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('69', '69 Керамические изделия', '69 Ceramic products', '69 陶瓷产品', 'false', '69 Керамические изделия 69 Ceramic products 69 陶瓷产品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('70', '70 Стекло и изделия из него', '70 Glass and glassware', '70 玻璃及其制品', 'false', '70 Стекло и изделия из него 70 Glass and glassware 70 玻璃及其制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('71', '71 Драгоценные металлы и камни', '71 Pearls, precious metals', '71 珍珠、贵金属', 'false', '71 Драгоценные металлы и камни 71 Pearls, precious metals 71 珍珠、贵金属');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('72', '72 Черные металлы', '72 Iron and steel', '72 钢铁', 'false', '72 Черные металлы 72 Iron and steel 72 钢铁');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('73', '73 Изделия из черных металлов', '73 Iron or steel articles', '73 钢铁制品', 'false', '73 Изделия из черных металлов 73 Iron or steel articles 73 钢铁制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('74', '74 Медь', '74 Copper', '74 铜', 'false', '74 Медь 74 Copper 74 铜');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('75', '75 Никель', '75 Nickel', '75 镍', 'false', '75 Никель 75 Nickel 75 镍');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('76', '76 Алюминий', '76 Aluminum', '76 铝', 'false', '76 Алюминий 76 Aluminum 76 铝');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('78', '78 Свинец', '78 Lead', '78 铅', 'false', '78 Свинец 78 Lead 78 铅');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('79', '79 Цинк', '79 Zinc', '79 锌', 'false', '79 Цинк 79 Zinc 79 锌');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('80', '80 Олово', '80 Tin', '80 锡', 'false', '80 Олово 80 Tin 80 锡');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('81', '81 Прочие недрагоценные металлы', '81 Other base metals', '81 其他贱金属', 'false', '81 Прочие недрагоценные металлы 81 Other base metals 81 其他贱金属');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('82', '82 Инструменты и столовые приборы', '82 Tools and cutlery', '82 工具及餐具', 'false', '82 Инструменты и столовые приборы 82 Tools and cutlery 82 工具及餐具');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('83', '83 Прочие металлоизделия', '83 Miscellaneous metal articles', '83 杂项金属制品', 'false', '83 Прочие металлоизделия 83 Miscellaneous metal articles 83 杂项金属制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('84', '84 Механическое оборудование и техника, компьютеры', '84 Machinery, computers', '84 机械设备、计算机', 'false', '84 Механическое оборудование и техника, компьютеры 84 Machinery, computers 84 机械设备、计算机');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('85', '85 Электрические устройства, аппаратура связи', '85 Electrical machinery, telecom', '85 电机、电气设备', 'false', '85 Электрические устройства, аппаратура связи 85 Electrical machinery, telecom 85 电机、电气设备');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('86', '86 Железнодорожная техника', '86 Railway vehicles', '86 铁道车辆', 'false', '86 Железнодорожная техника 86 Railway vehicles 86 铁道车辆');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('87', '87 Автотехника', '87 Vehicles', '87 汽车', 'false', '87 Автотехника 87 Vehicles 87 汽车');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('88', '88 Летательные аппараты', '88 Aircraft', '88 航空器', 'false', '88 Летательные аппараты 88 Aircraft 88 航空器');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('89', '89 Суда и плавсредства', '89 Ships and boats', '89 船舶', 'false', '89 Суда и плавсредства 89 Ships and boats 89 船舶');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('90', '90 Оптика, приборы, медицинская техника', '90 Optical, medical instruments', '90 光学、医疗仪器', 'false', '90 Оптика, приборы, медицинская техника 90 Optical, medical instruments 90 光学、医疗仪器');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('91', '91 Часы', '91 Clocks and watches', '91 钟表', 'false', '91 Часы 91 Clocks and watches 91 钟表');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('92', '92 Музыкальные инструменты', '92 Musical instruments', '92 乐器', 'false', '92 Музыкальные инструменты 92 Musical instruments 92 乐器');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('93', '93 Оружие и боеприпасы', '93 Arms and ammunition', '93 武器弹药', 'false', '93 Оружие и боеприпасы 93 Arms and ammunition 93 武器弹药');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('94', '94 Мебель, осветительная техника', '94 Furniture, lighting', '94 家具、灯具', 'false', '94 Мебель, осветительная техника 94 Furniture, lighting 94 家具、灯具');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('95', '95 Игрушки и спортинвентарь', '95 Toys, sports equipment', '95 玩具、运动用品', 'false', '95 Игрушки и спортинвентарь 95 Toys, sports equipment 95 玩具、运动用品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('96', '96 Разные промтовары', '96 Miscellaneous manufactures', '96 杂项制品', 'false', '96 Разные промтовары 96 Miscellaneous manufactures 96 杂项制品');
+INSERT INTO "Tnved" (value, title, titleEn, titleCn, disabled, search) VALUES ('97', '97 Произведения искусства', '97 Works of art', '97 艺术品', 'false', '97 Произведения искусства 97 Works of art 97 艺术品');
+
+
+
+
+INSERT INTO "Country" (value, title, titleEn, titleCn, search, alpha2, disabled, friend) VALUES
+('076', 'Бразилия', 'Brazil', '巴西', 'Бразилия\nФедеративная Республика Бразилия\nBrazil\nBR\nBRA\nFederative Republic of Brazil\n076\n\n076', 'BR', false, true),
+('356', 'Индия', 'India', '印度', 'Индия\nРеспублика Индия\nIndia\nIN\nIND\nRepublic of India\n356\n\n356', 'IN', false, true),
+('156', 'Китай', 'China', '中国', 'Китай\nКитайская Народная Республика\nChina\nCN\nCHN\nPeople''s Republic of China\n156\nКНР', 'CN', false, true),
+('710', 'ЮАР', 'South Africa', '南非', 'ЮАР\nЮжно-Африканская Республика\nSouth Africa\nZA\nZAF\nRepublic of South Africa\n710\n\n710', 'ZA', false, true),
+('364', 'Иран', 'Iran', '伊朗', 'Иран\nИсламская Республика Иран\nIran\nIR\nIRN\nIslamic Republic of Iran\n364\n\n364', 'IR', false, true),
+('818', 'Египет', 'Egypt', '埃及', 'Египет\nАрабская Республика Египет\nEgypt\nEG\nEGY\nArab Republic of Egypt\n818\n\n818', 'EG', false, true),
+('231', 'Эфиопия', 'Ethiopia', '埃塞俄比亚', 'Эфиопия\nФедеративная Демократическая Республика Эфиопия\nEthiopia\nET\nETH\nFederal Democratic Republic of Ethiopia\n231\n\n231', 'ET', false, true),
+('784', 'ОАЭ', 'United Arab Emirates', '阿拉伯联合酋长国', 'ОАЭ\nОбъединенные Арабские Эмираты\nUnited Arab Emirates\nAE\nARE\nUnited Arab Emirates\n784\n\n784', 'AE', false, true),
+('360', 'Индонезия', 'Indonesia', '印度尼西亚', 'Индонезия\nРеспублика Индонезия\nIndonesia\nID\nIDN\nRepublic of Indonesia\n360\n\n360', 'ID', false, true);

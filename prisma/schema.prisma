@@ -40,6 +40,8 @@ model User {
 model Country {
   value    String     @unique
   title    String
+  titleEn  String
+  titleCn  String
   search   String     @db.Text
   alpha2   String
   disabled Boolean    @default(false)
@@ -50,6 +52,8 @@ model Country {
 model Tnved {
   value    String     @unique
   title    String
+  titleEn  String
+  titleCn  String
   disabled Boolean    @default(false)
   search   String     @db.Text
   Contract Contract[]
