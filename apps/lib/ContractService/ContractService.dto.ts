@@ -2,7 +2,7 @@ export type TCreateContract = {
     title: string;
     sum: number;
     description: string;
-    image: Buffer;
+    photoPath: string;
     countryId: string;
     authorId: number;
     tnvedId: string;

@@ -133,11 +133,20 @@ export class AgreementService {
                     where: { id: getAgreementByContract.contractId, authorId: getAgreementByContract.authorId },
                     select: { id: true, status: true },
                 });
+
                 const agreementsonContract = await prisma.agreement.findMany({
                     where: {
                         contractId: contract.id,
                     },
+                    include: {
+                        exporter: {
+                            select: {
+                                name: true,
+                            },
+                        },
+                    },
                 });
+
                 return agreementsonContract;
             });
         } catch (error) {

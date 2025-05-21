@@ -70,7 +70,7 @@ model Contract {
   tnvedId     String
   country     Country     @relation(fields: [countryId], references: [value])
   countryId   String
-  image       Bytes
+  photoPath   String?
   status      STATUSES    @default(CREATE)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt

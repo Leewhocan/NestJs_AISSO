@@ -17,8 +17,7 @@ export class ContractService {
         console.log(createContractInfo);
         try {
             const contract = await this.prisma.contract.create({ data: { ...createContractInfo } });
-            const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
-            return { ...contract, image: bufferImage };
+            return { ...contract };
         } catch (error) {
             console.log(error);
             throw new Error(error);
@@ -31,7 +30,7 @@ export class ContractService {
                 ...(tnved && { tnvedId: tnved }),
                 ...(country && { countryId: country }),
             };
-
+            console.log(whereConditions);
             const skip = (page - 1) * ammount;
             const total = await this.prisma.contract.count();
             const lastContracts = await this.prisma.contract.findMany({
@@ -43,8 +42,7 @@ export class ContractService {
                 where: whereConditions,
             });
             const updateImageLastContracts = lastContracts.map((contract) => {
-                const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
-                return { ...contract, image: bufferImage };
+                return { ...contract };
             });
             const meta = {
                 total,
@@ -59,17 +57,17 @@ export class ContractService {
     }
 
     async getContractById(idContract: number) {
-        try {
-            const contract = await this.prisma.contract.findFirst({
-                where: {
-                    id: idContract,
-                },
-            });
-            const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
-            return { ...contract, image: bufferImage };
-        } catch (error) {
-            throw new Error(error);
+        const contract = await this.prisma.contract.findFirst({
+            where: {
+                id: idContract,
+            },
+        });
+
+        if (!contract) {
+            throw new Error(`Contract with ID ${idContract} not found`);
         }
+
+        return contract;
     }
     async getByAuthor(contractByAuthorInfo: TGetContractByAuthor) {
         // console.log(contractByAuthorInfo);
@@ -81,8 +79,7 @@ export class ContractService {
                 },
             });
             const updateImageLastContracts = lastContracts.map((contract) => {
-                const bufferImage = Buffer.from(Object.values(contract.image)).toString('base64');
-                return { ...contract, image: bufferImage };
+                return { ...contract };
             });
             return { updateImageLastContracts };
         } catch (error) {
@@ -111,7 +108,6 @@ export class ContractService {
 
         return {
             ...updatedContract,
-            image: updatedContract.image ? Buffer.from(Object.values(updatedContract.image)).toString('base64') : null,
         };
     }
     async deleteContract(deleteContractData: TDeleteContract) {
